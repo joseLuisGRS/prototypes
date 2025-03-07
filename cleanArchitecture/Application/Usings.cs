@@ -1,0 +1,12 @@
+﻿global using Application.DTOs;
+global using Application.Enums;
+global using Application.Interfaces.Repositories;
+global using Application.Interfaces.Services;
+global using Application.Mapping;
+global using Application.Services;
+global using AutoMapper;
+global using Domain.POCOs.Common;
+global using Domain.POCOs;
+global using FluentValidation;
+global using Microsoft.Extensions.DependencyInjection;
+global using Utilities.Helpers;

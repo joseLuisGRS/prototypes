@@ -1,0 +1,38 @@
+﻿.swagger-ui .topbar {
+    background-color: #00499e;
+    border-bottom: 3px solid #00316b;
+}
+
+.swagger-ui img {
+    display: block;
+    height: 0px;
+}
+
+.topbar-wrapper img[alt="Swagger UI"], .topbar-wrapper span {
+    visibility: collapse;
+}
+
+.topbar-wrapper svg {
+    display: none;
+}
+
+.topbar-wrapper .link {
+    position: relative;
+}
+
+.topbar-wrapper .link::after {
+    content: "";
+    top: 0;
+    left: 100%; 
+    width: 80px;
+    height: 50px; 
+    background-image: url(/ui/css/logo.png);
+    background-size: cover; 
+    background-repeat: round;
+    display: inline-block; 
+    transition: transform 0.3s ease;
+}
+
+.topbar-wrapper .link:hover::after {
+    transform: scale(1.3); 
+}
