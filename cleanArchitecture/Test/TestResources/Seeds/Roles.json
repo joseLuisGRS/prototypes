@@ -1,0 +1,29 @@
+[
+  {
+    "Id": 1,
+    "Name": "admin",
+    "Description": "administrador",
+    "IsActive": true,
+    "IsDeleted": false,
+    "CreationDate": "2025-03-15T13:14:09.3770000",
+    "CreationUserId": 1
+  },
+  {
+    "Id": 2,
+    "Name": "ventas",
+    "Description": "Usuario de ventas",
+    "IsActive": true,
+    "IsDeleted": false,
+    "CreationDate": "2025-03-15T13:14:10.3770000",
+    "CreationUserId": 1
+  },
+  {
+    "Id": 1,
+    "Name": "gerente",
+    "Description": "gerente",
+    "IsActive": true,
+    "IsDeleted": false,
+    "CreationDate": "2025-03-15T13:14:11.3770000",
+    "CreationUserId": 1
+  }
+]

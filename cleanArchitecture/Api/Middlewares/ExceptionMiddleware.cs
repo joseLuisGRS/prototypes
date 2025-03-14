@@ -52,6 +52,20 @@ public class ExceptionMiddleware(RequestDelegate next,
                                customEx.StackTrace });
             await HandlerExceptionAsync(httpContext, customEx, (HttpStatusCode)customEx.StatusCode);
         }
+        catch (SqlException sqlEx)
+        {
+            logger.LogError("Something went wrong: {message}", sqlEx.Message);
+
+            loggerService.LogWrite(
+                LogLevels.Error,
+                "Project {source}, Severity Type {severity} : StackTrace {customEx}",
+                ex: sqlEx,
+                logTypes: LogTypes.File,
+                arg: new object[] { sqlEx,
+                               sqlEx.InnerException,
+                               sqlEx.Message });
+            await HandlerExceptionAsync(httpContext, sqlEx);
+        }
         catch (Exception ex)
         {
             logger.LogError("Something went wrong: {message}", ex.Message);
