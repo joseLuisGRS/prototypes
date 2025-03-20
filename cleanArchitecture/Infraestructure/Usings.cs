@@ -18,5 +18,6 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Options;
 global using Serilog.Core;
 global using Serilog.Events;
+global using Serilog.Sinks.SystemConsole.Themes;
 global using Serilog;
 global using Utilities.Handler;

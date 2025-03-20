@@ -3,6 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Clear all logging providers and add Serilog.
 builder.Logging.ClearProviders();
+builder.Host.Serilog();
 
 // Add services to the container.
 builder.Services.AddControllers();
