@@ -95,4 +95,19 @@ public static class ConfigurationServices
         return builder;
     }
 
+    /// <summary>
+    /// Configures the application to use Serilog for logging.
+    /// </summary>
+    /// <param name="hostBuilder">The host builder to configure.</param>
+    /// <returns>The same host builder so that multiple calls can be chained.</returns>
+    public static IHostBuilder Serilog(this IHostBuilder hostBuilder)
+    {
+        hostBuilder.UseSerilog((hostBuilderContext, loggerConfiguration) =>
+        {
+            loggerConfiguration.ConfigureBaseLogging(AppDomain.CurrentDomain.FriendlyName);
+        });
+
+        return hostBuilder;
+    }
+
 }
