@@ -24,6 +24,9 @@ builder.Services.AddValidatorsServices();
 // Add API explorer endpoints to the service collection. see href="https://aka.ms/aspnetcore/swashbuckle"
 builder.Services.AddEndpointsApiExplorer();
 
+// Add rate limiting to the service collection.
+builder.Services.AddRatelimiting(builder.Configuration);
+
 var app = builder.Build();
 
 // Use the developer exception page middleware.
@@ -44,6 +47,7 @@ app.UseHttpsRedirection()
    .UseAuthentication()
    .UseRouting()
    .UseAuthorization()
+   .UseRateLimiter()
    .UseEndpoints(endpoints =>
    {
        endpoints.MapControllers();
