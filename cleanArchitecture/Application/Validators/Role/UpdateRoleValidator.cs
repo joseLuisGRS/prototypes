@@ -1,4 +1,4 @@
-﻿namespace Application.Validators;
+﻿namespace Application.Validators.Role;
 
 /// <summary>
 /// Class to validate data from UpdateRoleDto
@@ -13,7 +13,7 @@ public class UpdateRoleValidator : AbstractValidator<UpdateRoleDto>
 
         RuleFor(r => r.Id)
             .NotEmpty().WithMessage("El id del rol es obligatorio")
-            .GreaterThan(0).WithMessage("El id del rol debe ser número entero positivo.");           
+            .GreaterThan(0).WithMessage("El id del rol debe ser número entero positivo.");
 
         RuleFor(r => r.Name)
             .NotEmpty().WithMessage("El nombre del rol es obligatorio.")

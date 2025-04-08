@@ -6,7 +6,8 @@
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-//[Authorize]
+[EnableRateLimiting("fixedWindow")]
+[Authorize]
 public class RolesController(IRoleService _roleService, IMapper _mapper) : ControllerBase
 {
 
