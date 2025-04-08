@@ -5,8 +5,20 @@
 /// </summary>
 /// <param name="_roleRepository">The role repository is used for database operations. </param>
 /// <param name="_mapper">The extension helps us to map other types of data. </param>
-public class RoleService(IRoleRepository _roleRepository, IMapper _mapper) : IRoleService
+public class RoleService : IRoleService
 {
+    private readonly IRoleRepository _roleRepository;
+    private readonly IMapper _mapper;
+    private readonly ITokenExtractor _tokenExtractor;
+    private UserDataTokenDto userDataTokenDto;
+
+    public RoleService(IRoleRepository roleRepository, IMapper mapper, ITokenExtractor tokenExtractor)
+    {
+        _roleRepository = roleRepository;
+        _mapper = mapper;
+        _tokenExtractor = tokenExtractor;
+        userDataTokenDto = _tokenExtractor.ExtractToken();
+    }
 
     public async ValueTask<IEnumerable<RoleDto>> GetAllAsync()
     {
@@ -26,6 +38,7 @@ public class RoleService(IRoleRepository _roleRepository, IMapper _mapper) : IRo
             throw new CustomException(SourceType.Application, SeverityType.Warning, EHttpStatusCode.BadRequest, "Role name already exists");
 
         var role = _mapper.Map<Role>(createRoleDto);
+        role.CreationUserId = userDataTokenDto.Id;
 
         await _roleRepository.AddAsync(role);
         await _roleRepository.SaveChangesAsync();
@@ -39,29 +52,29 @@ public class RoleService(IRoleRepository _roleRepository, IMapper _mapper) : IRo
 
         role.Name = updateRoleDto.Name;
         role.Description = updateRoleDto.Description;
-        role.ModificationUserId = updateRoleDto.ModificationUserId;
+        role.ModificationUserId = userDataTokenDto.Id;
 
         _roleRepository.UpdateAsync(role);
         return await _roleRepository.SaveChangesAsync();
     }
 
-    public async ValueTask<bool> UpdateStatusAsync(Int64 id, Int64 userId)
+    public async ValueTask<bool> UpdateStatusAsync(Int64 id)
     {
         var role = await _roleRepository.GetByIdAsync(id)
             ?? throw new CustomException(SourceType.Application, SeverityType.Warning, EHttpStatusCode.NotFound, "Role not found");
 
-        role.ModificationUserId = userId;
+        role.ModificationUserId = userDataTokenDto.Id;
 
         _roleRepository.UpdateStatusAsync(role);
         return await _roleRepository.SaveChangesAsync();
     }
 
-    public async ValueTask<bool> DeleteAsync(Int64 id, Int64 userId)
+    public async ValueTask<bool> DeleteAsync(Int64 id)
     {
         var role = await _roleRepository.GetByIdAsync(id)
             ?? throw new CustomException(SourceType.Application, SeverityType.Warning, EHttpStatusCode.NotFound, "Role not found");
 
-        role.ModificationUserId = userId;
+        role.ModificationUserId = userDataTokenDto.Id;
 
         _roleRepository.DeleteAsync(role);
         return await _roleRepository.SaveChangesAsync();
