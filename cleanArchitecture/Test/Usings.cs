@@ -1,4 +1,4 @@
-﻿global using Application.DTOs;
+﻿global using Application.DTOs.Roles;
 global using Domain.POCOs;
 global using Infrastructure.DataContexts;
 global using Microsoft.AspNetCore.Hosting;

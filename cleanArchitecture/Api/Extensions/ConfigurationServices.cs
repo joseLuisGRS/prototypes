@@ -110,4 +110,11 @@ public static class ConfigurationServices
         return hostBuilder;
     }
 
+    public static IServiceCollection AddApiServices(this IServiceCollection services)
+    {
+        services.AddScoped<ITokenExtractor, TokenExtractor>();
+
+        return services;
+    }
+
 }

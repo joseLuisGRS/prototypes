@@ -1,4 +1,6 @@
-﻿global using Application.DTOs;
+﻿global using Application.Commons;
+global using Application.DTOs.Auth;
+global using Application.DTOs.Roles;
 global using Application.Enums;
 global using Application.Interfaces.Repositories;
 global using Application.Interfaces.Services;
@@ -9,4 +11,5 @@ global using Domain.POCOs.Common;
 global using Domain.POCOs;
 global using FluentValidation;
 global using Microsoft.Extensions.DependencyInjection;
+global using System.Text.Json.Serialization;
 global using Utilities.Helpers;

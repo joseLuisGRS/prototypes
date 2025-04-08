@@ -1,4 +1,6 @@
-﻿namespace Test.Controllers;
+﻿using Application.DTOs.Roles;
+
+namespace Test.Controllers;
 
 public class RoleControllerTest(TestContainerFactory<Program> factory) : IClassFixture<TestContainerFactory<Program>>
 {

@@ -1,4 +1,4 @@
-﻿namespace Application.Validators;
+﻿namespace Application.Validators.Role;
 
 /// <summary>
 /// Class to validate data from CreateRoleDto

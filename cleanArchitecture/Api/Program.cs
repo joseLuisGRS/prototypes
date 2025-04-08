@@ -17,6 +17,7 @@ builder.Services.AddCors();
 //Dependency Injection Services
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddApiServices();
 
 //Validators
 builder.Services.AddValidatorsServices();
@@ -40,6 +41,7 @@ app.UseCustomSwaggerUI(app);
 
 // Use the exception middleware.
 app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<TokenRevocationMiddleware>();
 
 // Configure the HTTP request pipeline to use HTTPS redirection, authentication,
 // routing, authorization, rate limiting, endpoints, static files, and custom health checks UI.
