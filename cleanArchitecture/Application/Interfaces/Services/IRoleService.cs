@@ -34,18 +34,16 @@ public interface IRoleService
     /// Updates the status of an existing role.
     /// </summary>
     /// <param name="id">The id parameter is used to search the role. </param>
-    /// <param name="userId">The parameter userId is used to update the role data. </param>
     /// <returns>Returns true when the role was successfully updated or false otherwise. </returns>
     /// <returns>Returns a CustomException in case the role name already exists. </returns>
-    ValueTask<bool> UpdateStatusAsync(Int64 id, Int64 userId);
+    ValueTask<bool> UpdateStatusAsync(Int64 id);
     /// <summary>
     /// Deletes an existing role.
     /// </summary>
     /// <param name="id">The id parameter is used to search the role.</param>
-    /// <param name="userId">The parameter userId is used to update the role data.</param>
     /// <returns>Returns true when the role was successfully updated or false otherwise. </returns>
     /// <returns>Returns a CustomException in case the role name already exists. </returns>
-    ValueTask<bool> DeleteAsync(Int64 id, Int64 userId);
+    ValueTask<bool> DeleteAsync(Int64 id);
     /// <summary>
     /// Validates the existence of a role by its name.
     /// </summary>

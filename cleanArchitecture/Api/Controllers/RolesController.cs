@@ -76,8 +76,6 @@ public class RolesController(IRoleService _roleService, IMapper _mapper) : Contr
     {
         try
         {
-            createRoleDto.CreationUserId = 1;
-
             var createdRole = await _roleService.CreateAsync(createRoleDto);
             return Created(nameof(GetById), ApiResponse<RoleDto>.SuccessResponse(createdRole, "Role created successfully."));
         }
@@ -108,8 +106,6 @@ public class RolesController(IRoleService _roleService, IMapper _mapper) : Contr
     {
         try
         {
-            updateRoleDto.ModificationUserId = 1;
-
             return await _roleService.UpdateAsync(updateRoleDto)
                 ? Ok(ApiResponse<RoleDto>.SuccessResponse(_mapper.Map<RoleDto>(updateRoleDto), "Role updated with success!"))
                 : BadRequest(ApiResponse<string>.ErrorResponse("Failed to update role"));
@@ -141,9 +137,7 @@ public class RolesController(IRoleService _roleService, IMapper _mapper) : Contr
     {
         try
         {
-            var userId = 1;
-
-            await _roleService.UpdateStatusAsync(id, userId);
+            await _roleService.UpdateStatusAsync(id);
             return Ok(ApiResponse<string>.SuccessResponse(null, "Role updated successfully."));
         }
         catch (KeyNotFoundException)
@@ -173,8 +167,7 @@ public class RolesController(IRoleService _roleService, IMapper _mapper) : Contr
     {
         try
         {
-            var userId = 1;
-            await _roleService.DeleteAsync(id, userId);
+            await _roleService.DeleteAsync(id);
             return Ok(ApiResponse<string>.SuccessResponse(null, "Role deleted successfully."));
         }
         catch (KeyNotFoundException)
