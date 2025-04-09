@@ -3,20 +3,21 @@
 /// <summary>
 /// Contains the mapping of entities and DTO to another data model.
 /// </summary>
-public class AutoMapperProfiles : Profile
+public static class AutoMapperProfiles
 {
-    public AutoMapperProfiles()
+    public static void RegisterMappings()
     {
-        CreateMap<Role, RoleDto>().ReverseMap();
-        CreateMap<Role, CreateRoleDto>().ReverseMap();
-        CreateMap<Role, UpdateRoleDto>().ReverseMap();
-        CreateMap<RoleDto, UpdateRoleDto>().ReverseMap();
+        TypeAdapterConfig<Role, RoleDto>.NewConfig();
+        TypeAdapterConfig<Role, CreateRoleDto>.NewConfig();
+        TypeAdapterConfig<Role, UpdateRoleDto>.NewConfig();
+        TypeAdapterConfig<RoleDto, UpdateRoleDto>.NewConfig();
 
-        CreateMap<User, UserDto>()
-            .ForMember(dto => dto.FirstName, e => e.MapFrom(src => src.Person.FirstName))
-            .ForMember(dto => dto.LastName, e => e.MapFrom(src => src.Person.LastName))
-            .ForMember(dto => dto.Role, e => e.MapFrom(src => src.Role.Name))
-            .ReverseMap();
-        CreateMap<UserDto, UserRefreshTokenDto>().ReverseMap();
+        TypeAdapterConfig<User, UserDto>.NewConfig()
+            .Map(dto => dto.FirstName, src => src.Person.FirstName)
+            .Map(dto => dto.LastName, src => src.Person.LastName)
+            .Map(dto => dto.Role, src => src.Role.Name);
+        TypeAdapterConfig<UserDto, UserRefreshTokenDto>.NewConfig();
+
     }
+
 }
