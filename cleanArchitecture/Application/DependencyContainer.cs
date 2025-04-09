@@ -10,7 +10,11 @@ public static class DependencyContainer
         services.AddTransient<IRoleService, RoleService>();
         services.AddTransient<IAuthService, AuthService>();
 
-        services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+        var config = new TypeAdapterConfig();
+        AutoMapperProfiles.RegisterMappings();
+        services.AddSingleton(config);
+        services.AddSingleton<IMapper, MapperService>();
+
         return services;
     }
 }
